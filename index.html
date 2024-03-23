@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berfin</title>
+<style type="text/css">
+
+ body {
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+ }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  position: relative;
+}
+
+.gift-image {
+  max-width: 50%;
+  max-height: 50%;
+  margin-top: 20px; /* Gif resminin altındaki boşluğu ayarlar */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.gift-box {
+  margin-bottom: 20px; /* Kutuyu Açmak ister misiniz? yazısının altındaki boşluğu ayarlar */
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.yes-btn {
+  background-color: #00CF88;
+  color: white;
+}
+
+.no-btn {
+  background-color: #009ACF;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+</style>
+</head>
+<body id="body">
+<p id="muzik" style="display:none;"></p>
+<div class="container">
+    <img id="resim" src="https://i.pinimg.com/originals/fd/2c/1a/fd2c1a96b654e220d09525f006482477.gif" class="gift-image">
+  <div class="gift-box">
+    <p id="question">Merhaba Defne, Kutuyu Açmak ister misin?</p>
+    <div class="buttons">
+      <button id="button1" class="yes-btn" onclick="checkClick()">Aç</button>
+      <button id="button2" class="no-btn" onclick="noButtonClick()">Hayır</button>
+    </div>
+  </div>
+  
+</div>
+</body>
+
+
+<script>
+function moveButton() {
+  var container = document.querySelector('.container');
+  var button = document.querySelector('.yes-btn');
+  var buttonWidth = button.offsetWidth;
+  var buttonHeight = button.offsetHeight;
+  
+  // Rastgele bir x ve y konumu oluştur
+  var randomX = Math.floor(Math.random() * (container.offsetWidth - buttonWidth));
+  var randomY = Math.floor(Math.random() * (container.offsetHeight - buttonHeight));
+  
+  // Butonun yeni konumunu ayarla
+  button.style.position = 'absolute';
+  
+  // Gif'in üzerine gelmemesi için kontrol yap
+  if (
+    randomX > container.offsetWidth / 2 - buttonWidth / 2 &&
+    randomX < container.offsetWidth / 2 + buttonWidth / 2 &&
+    randomY > container.offsetHeight / 2 - buttonHeight / 2 &&
+    randomY < container.offsetHeight / 2 + buttonHeight / 2
+  ) {
+    // Eğer buton gif'in üzerine geliyorsa, farklı bir konuma yerleştir
+    randomX += 100;
+    randomY += 100;
+  }
+  
+  button.style.left = randomX + 'px';
+  button.style.top = randomY + 'px';
+}
+
+var clickCount = 0;
+
+function checkClick() {
+  clickCount++;
+  moveButton();
+  
+  var question = document.getElementById('question');
+  var button1 = document.getElementById('button1');
+  
+  if (clickCount === 3) {
+    question.innerHTML = "<b>Hayatında yeni bir yaş daha başlıyor ve bu yaşın senin için harika sürprizler, mutluluklar ve başarılar getirecek buna inanıyorum...</b>";
+    button1.innerHTML="Aç";
+  } else if (clickCount === 4) {
+    button1.innerHTML="Aç";
+  } else if (clickCount === 5) {
+    question.innerHTML = "Bu yaş, hayat senin için bir kutu çikolata gibi olucak belkde. Her bir dilimi tatlı sürprizlerle dolu, her ısırığında biraz daha mutluluk hissedeceksin Biraz heyecan, bazen kahkahalar, bazende hüzünler (Hüzünü çikolatanın bittiğini farzet 🥴) ama sonunda hep güzel bir sona varacağını bilmen gerekiyor.";
+  } else if (clickCount === 7) {
+    question.innerHTML = "<b>Tamam Tamam Artık Süprizi Görme Vakti Geldi...</b>";
+    button1.innerHTML="Süprizi Gör";
+  } else if (clickCount === 8) {
+    window.location.href = "https://oaydinberk.github.io/cicek";
+  }
+}
+
+function noButtonClick() {
+  var question = document.getElementById('question');
+  var button1 = document.getElementById('button1');
+  var button2 = document.getElementById('button2');
+  
+  question.innerHTML = "<b>Peki...</b>";
+  document.getElementById('muzik').innerHTML = '<iframe style="display: none;" width="560" height="315" src="https://www.youtube.com/embed/YPRtYP8g40Y?autoplay=1&loop=1&playlist=YPRtYP8g40Y" frameborder="0" allowfullscreen allow="autoplay"></iframe>';
+  var resim = document.getElementById("resim");
+    resim.src = "https://uploads.dailydot.com/c26/02/0b070ed92fe8daf4.gif?auto=compress&fm=gif";
+ button1.style.display = 'none';
+  button2.style.display = 'none';
+}
+</script>
+
+</html>
